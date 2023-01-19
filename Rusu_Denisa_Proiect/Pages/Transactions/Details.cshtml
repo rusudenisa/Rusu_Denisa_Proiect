@@ -1,0 +1,54 @@
+﻿@page
+@model Rusu_Denisa_Proiect.Pages.Transactions.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Transaction</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaction.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transaction.Id)
+        </dd>
+        
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Transaction.TotalPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Transaction.TotalPrice)
+        </dd>
+        <dt class="col-sm-10">Items</dt>
+			@{
+				@:<ul>
+				foreach (var item in Model.Transaction.TransactionItems)
+				{
+                    if(item.Flower!=null)
+                    {
+                    @:<li class="col-sm-10">
+
+						@item.Flower.Name @: x @item.Quantity
+				    @:</li>
+                    }
+                    else
+                    {
+                        @:<li class="col-sm-10">
+
+						    @item.Bouquet.Name @: x @item.Quantity
+				        @:</li>
+                    }
+				@:</ul>
+			}
+			}
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Transaction?.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
